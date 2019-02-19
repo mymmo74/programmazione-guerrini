@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Calcoli</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jscalcoli.js"></script>
+        <script src="js/mylibrary.js"></script>
+        <style>
+            .medioButton{width: 155px;}
+
+            .medioInput {width: 108px;}
+            
+            .styleDIV {
+                font-size: 18px;
+                font-size: large;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Calcoli</h2>
+        <span>num1: <input class="medioInput" id="in_val1" type="number" placeholder="ins.numero"/></span>
+        <span>num2: <input class="medioInput" id="in_val2" type="number" placeholder="ins.numero"/></span><br/><br/>
+
+        <div id="operazioni">
+            <button class="medioButton" onclick="calcolaPotenza()"><b>Num1</b> elevato <b>Num2</b></button><br/>
+            <button class="medioButton" onclick="calcolaSomma()"><b>Num1</b> sommato <b>Num2</b></button>
+        </div><br/><br/>
+        <div class="styleDIV" id="div_risultato"></div>
+    </body>
+</html>

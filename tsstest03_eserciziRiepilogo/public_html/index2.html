@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Benvenuto utente</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/scripts2.js"></script>
+        <style>
+            /* all'avvio visualizzo il div di login e nascondo il div esame'*/
+            
+            #login {
+                display: block;
+
+            }
+            #esame {
+                display: none;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="login">
+            <h2>LOGIN</h2>
+            <input type="text" id="in_nome" placeholder="ins. nome" />
+            <input type="text" id="in_cognome" placeholder="ins. cognome" /><br/><br/>
+            <button onclick="loginUser()">Hello</button>
+            <span id="sp_utente"></span>
+        </div>
+        <div id="esame">
+            <h2>ESAME</h2>
+            <input type="number" id="in_voto" placeholder="ins. voto" min="0" max="10"/>
+            <input type="number" id="in_riferimento" placeholder="ins. voto min promozione" min="0" max="10" /><br/><br/>
+            <button onclick="getValutazione()">Esame</button>
+            <span id="sp_giudizio"></span>
+        </div>
+    </body>
+</html>

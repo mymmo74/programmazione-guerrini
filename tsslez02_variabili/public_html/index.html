@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Calcolatrice</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/scripts.js"></script>
+    </head>
+    <!-- dentro body vi sono tutti i nostri oggetti grafici -->
+    <body>
+        <!-- classica suddivisione di una pagina web -->
+        <div id="header">Totalone
+            <div id="div_totale">0</div>
+        </div>
+        <div id="content">
+            <input type="number" id="in_num1" /><br/>
+            <input type="number" id="in_num2" /><br/>
+            <button id="bt_addizione" onclick="somma()">+</button>
+            <!-- con this.innerHTML passo come parametro il contenuto fra i tag del bottone stesso -->
+            <button id="bt_sottrazione" onclick="calcola(this.innerHTML)">-</button>
+            <button id="bt_moltiplicazione" onclick="calcola('*')">*</button>
+            <button id="bt_divisione" onclick="calcola('/')">/</button>
+            <br/><br/>
+            <div id="div_ris">0</div>
+            
+        </div>
+        <div id="footer">footer piè di pagina</div>
+    </body>
+</html>

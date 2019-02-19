@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Pier Domenico Garrone
+31-01-2019
+-->
+<html>
+    <head>
+        <title>Esercizio 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/esercizio1.js" type="text/javascript"></script>
+        <style>
+            input{
+                width: 150px;
+            }
+            
+            
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <input type="text" id="inNome" placeholder="ins. nome e cognome" />
+            <button onclick="insSaluto()">Scrivi messaggio</button><br/>
+            <span id="spMessaggio"></span>
+
+        </div>
+        <hr/>
+
+        <div id="div2">
+            <input type="text" id="inNome1" value="Nome1" />
+            <input type="text" id="inNome2" value="Nome2" />
+            <input type="text" id="inNome3" value="Nome3" /><br/><br/>
+            <button onclick="spostaNome()">Sposta nome verso destra e inizio</button><br/>
+
+        </div>
+        <hr/>
+        <div id="div3">
+            <input type="text" id="inArticolo" placeholder="Articolo acquistato" />
+            <input type="number" id="inCosto" placeholder="costo" />
+            <button onclick="insArticolo()">Aggiungi</button><br/>
+            <span id="spCarrello"></span><br/>
+            <span id="spDivisorio">-------</span><br/>
+            Totale - <span id="spTotale"></span><br/>
+            Media - <span id="spMedia"></span><br/>
+            Min - <span id="spMin"></span><br/>
+            Max - <span id="spMax"></span><br/>
+        </div>
+    </body>
+</html>

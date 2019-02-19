@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>BANCA TSS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--CSS incorporato a file HTM-->
+        <style>
+            /* all'avvio visualizzo il div di login e nascondo il div banca'*/
+            button {
+                color: blue;
+                background: aquamarine;
+            }
+
+             /*con il cancelletto # mi riferisco ad un nome di id che ho dato a oggetto*/
+            #banca {
+                /*con questa regola nascondo oggetto #banca*/
+                display:none;
+
+            }
+            #login {
+                display:block;
+
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="login">
+            <h2>LOGIN</h2>
+            <input type="text" id="in_usr" placeholder="ins. username" /><br/>
+            <input type="password" id="in_pwd" placeholder="ins. password" /><br/>
+            <input type="text" id="in_tkn" placeholder="ins. token" /><br/>
+            <button onclick="loginUser()">Login</button>
+        </div>
+
+        <div id="banca">
+            <div id="div_banca">BANCA TSS conto corrente di <span id="sp_nome"></span></div>
+            <br/>
+            <input type="text" id="in_nome" value="" placeholder="ins. cognome e nome" />
+            <button id="bt_login" onclick="inserisciNome()">
+                Login
+            </button>
+            <div id="div_saldo">Saldo corrente: <span id="sp_saldo">0</span> €</div>
+            <div id="div_movimenti">Array movimenti: <span id="sp_movimenti"></span></div>
+
+            <!-- Versamenti -->
+            <div class="versamenti"> 
+                <h3>VERSAMENTI</h3>
+                <input type="text" id="in_vers" value="" placeholder="ins. importo da versare" />
+                <button id="bt_vers" onclick="versaImporto()">
+                    Versa Importo
+                </button>
+            </div>  
+
+            <!-- Prelievi-->
+            <div class="prelievi"> 
+                <h3>PRELIEVI</h3>
+                <input type="text" id="in_prev" value="" placeholder="ins. importo da prelevare" />
+                <button id="bt_prev" onclick="prelevaImporto()">
+                    Preleva Importo
+                </button>
+            </div>    
+
+            <div id="div_notifiche" >area notifiche: <span id="sp_notif">nulla da segnalare</span></div>
+            <div id="div_mov">
+                <h3>MOVIMENTI</h3>
+                <!-- Tabella -->
+                <table>
+                    <!-- riga -->
+                    <tr>
+                        <!-- Table header, intestazione -->
+                        <th>Versamenti</th><th>Prelievi</th>
+                    </tr>
+                    <tr>
+                        <!-- contenuto del td 123<br><br/> -->
+                        <td id="td_vers"></td>
+                        <td id="td_prev"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    // Modo più moderno per dichiarare gli array
+    var ar_movimenti = [];
+
+
+    // In javascript anche se si definiscono il numero di elementi, posso aggiungerne o toglierne dinamicamente
+    // stile Java
+    var ar_prelievi2 = new Array(12);
+
+
+    function print_mov() {
+        // quando il metodo mi deve ritornare qualcosa per prima cosa inizializzo la variabile e in fondo
+        // metto il "return nomevariabile;"
+        let text = "";
+
+        let miosaldo = 0;
+
+        let maxver = 0;
+
+
+        for (i = 0; i < ar_movimenti.length; i++) {
+
+            if (ar_movimenti[i] >= 0) {
+                segno = "+";
+                colore = "black";
+            } else {
+
+                segno = "";
+                colore = "red";
+            }
+            if (ar_movimenti[i] > maxver)
+                maxver = ar_movimenti[i];
+
+            // il costrutto += è come scrivere text= text+...
+            //text += "<br/><b>#" + (i + 1) + "</b> --> " + segno + ar_movimenti[i];
+            text += "<br/><b>#" + (i + 1) + "</b><font color='" + colore + "'> --> " + segno + ar_movimenti[i] + "</font>";
+            miosaldo += ar_movimenti[i];
+        }
+        text += "<br/><b>SALDO : </b> " + miosaldo;
+        text += "<br/><b>Max versamento : </b> " + maxver;
+
+
+        return text;
+    }
+
+    function  versaImporto() {
+
+        //se in in_vers c'è qualcosa di errato non fare niente ed avvertire
+
+        /* sintassi IF    
+         if (condizione) {
+         // cosa fare se vero
+         }
+         else {
+         // cosa fare se falso
+         }
+         */
+
+        //metto la frase ad esempio "123" dentro a saldo_current
+        var txsaldo_current = document.getElementById("sp_saldo").innerHTML;
+
+        //metto la frase ad esempio "123" dentro a importo_current
+        var tximporto_current = document.getElementById("in_vers").value;
+
+        //per trasformare il testo in numero si può moltiplicare "*" ad esempio
+        //saldo_current=saldo_current*1
+        var saldo = parseFloat(txsaldo_current);
+
+        if (isNaN(tximporto_current)) {
+            alert("non hai scritto un numero, riprova!");
+
+        } else {
+            var importo = parseFloat(tximporto_current);
+            if (importo > 0) {
+                // aggiungo movimento ad ar_movimenti
+                ar_movimenti.push(importo);
+
+
+                //sommo due numeri (e non testi)
+                var nuovo_saldo = saldo + importo;
+                //vado a scrivere sulla pagina web il saldo
+                document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+
+                // scrivo il contenuto dell'array tramite il metodo "toString" (che mi stampa tutti gli elemneti)
+                document.getElementById("sp_movimenti").innerHTML = print_mov();
+
+
+                //cancello il valore inserito nella casella versamenti
+
+                //costruisco la lista movimenti nella tabella, prelevo l'attuale contenuto della cella td_vers 
+                //successivamente concateno a quello che c'era il valore versato e un tag di andata a capo <br/>
+                var txtd_vers = document.getElementById("td_vers").innerHTML;
+                txtd_vers = txtd_vers + tximporto_current + "<br/>";
+                document.getElementById("td_vers").innerHTML = txtd_vers;
+                //costruisco la lista movimenti nella tabella, prelevo l'attuale contenuto della cella td_prev 
+                //successivamente concateno a quello che c'era il "-" e un tag di andata a capo <br/>
+                var txtd_prev = document.getElementById("td_prev").innerHTML;
+                txtd_prev = txtd_prev + "-" + "<br/>";
+                document.getElementById("td_prev").innerHTML = txtd_prev;
+            } else {
+                alert("non hai scritto un numero valido!");
+
+            }
+        }
+        document.getElementById("in_vers").value = "";
+
+    }
+
+    function  prelevaImporto() {
+        //metto la frase ad esempio "123" dentro a saldo_current
+        var txsaldo_current = document.getElementById("sp_saldo").innerHTML;
+
+        //metto la frase ad esempio "123" dentro a importo_current
+        var tximporto_current = document.getElementById("in_prev").value;
+
+        //per trasformare il testo in numero si può moltiplicare "*" ad esempio
+        //saldo_current=saldo_current*1
+        var saldo = parseFloat(txsaldo_current);
+
+        if (isNaN(tximporto_current)) {
+            alert("non hai scritto un numero, riprova!");
+
+        } else {
+
+
+
+            var importo = parseFloat(tximporto_current);
+
+            if (importo > 0) {
+                // aggiungo movimento ad ar_movimenti (in negativo perchè sto prelevando)
+                ar_movimenti.push(-importo);
+
+
+                //sottraggo al saldo l'importo prelevato
+                var nuovo_saldo = saldo - importo;
+
+                //vado a scrivere sulla pagina web il saldo
+                document.getElementById("sp_saldo").innerHTML = nuovo_saldo;
+
+                // scrivo il contenuto dell'array tramite il metodo "toString" (che mi stampa tutti gli elemneti)
+                document.getElementById("sp_movimenti").innerHTML = print_mov();
+
+                //costruisco la lista movimenti nella tabella, prelevo l'attuale contenuto della cella td_vers 
+                //successivamente concateno a quello che c'era il "-" e un tag di andata a capo <br/>
+                var txtd_vers = document.getElementById("td_vers").innerHTML;
+                txtd_vers = txtd_vers + "-" + "<br/>";
+                document.getElementById("td_vers").innerHTML = txtd_vers;
+
+                //costruisco la lista movimenti nella tabella, prelevo l'attuale contenuto della cella td_prev 
+                //successivamente concateno a quello che c'era il valore prelevato e un tag di andata a capo <br/>
+                var txtd_prev = document.getElementById("td_prev").innerHTML;
+                txtd_prev = txtd_prev + tximporto_current + "<br/>";
+                document.getElementById("td_prev").innerHTML = txtd_prev;
+            } else {
+                alert("non hai scritto un numero valido!");
+
+            }
+        }
+
+        //cancello il valore inserito nella casella versamenti
+        document.getElementById("in_prev").value = "";
+
+    }
+
+
+    function inserisciNome() {
+        var txnome = document.getElementById("in_nome").value;
+
+
+        if (txnome > "") {
+            document.getElementById("sp_nome").innerHTML = txnome;
+        }
+
+    }
+
+    function loginUser() {
+        //parametrizzare e non metterli direttamente nel IF
+        var okusr = "mimmo";
+        var okpwd = "mimmo";
+        var oktkn = "qwertyuiop";
+
+        var txusr = document.getElementById("in_usr").value;
+        var txpwd = document.getElementById("in_pwd").value;
+        var txtkn = document.getElementById("in_tkn").value;
+
+        if ((txusr == okusr && txpwd == okpwd) || txtkn == oktkn) {
+            //cosa fare se vero e quindi ok
+            alert("OK ti faccio entrare");
+            document.getElementById("banca").style.display = "block";
+            document.getElementById("login").style.display = "none";
+        } else {
+            //cosa fare se errato
+            alert("dati non validi");
+        }
+    }
+
+
+</script>

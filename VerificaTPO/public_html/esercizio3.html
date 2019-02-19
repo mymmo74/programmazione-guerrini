@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+Pier Domenico Garrone
+31-01-2019
+-->
+<html>
+    <head>
+        <title>Esercizio 3</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/esercizio3.js" type="text/javascript"></script>
+        <style>
+            input{
+                width: 250px;
+            }
+            #spPrev{
+                font-size: 10px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <div id="divPav">
+                <h2>PREVENTIVO PAVIMENTO</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="number" id="inLarg" placeholder="Ins. Larghezza in metri"/><br/>
+                            <input type="number" id="inLung" placeholder="Ins. Lunghezza in metri"/><br/>
+                            <input type="number" id="inCosto" placeholder="Ins. Costo al metro quadro"/><br/>
+                            <input type="text" id="inNome" placeholder="Ins. Nome copertura"/><br/>
+                            <button onclick="creaPavimento()">crea pavimento</button><br/>
+                        </td>
+                        <td>
+                            <span id="spPav"></span>
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+            <hr>
+            <div id="divCliente">
+                <h2>PREVENTIVO CLIENTE</h2>
+                <input type="text" id="inCliente" placeholder="Ins. Nome cliente"/><br/>
+                <button onclick="creaCliente()">crea preventivo cliente</button><br/>
+                <button onclick="addPrev()">aggiungi preventivo cliente</button><br/>
+                <span id="spPrev"></span>
+            </div>
+        </div>
+    </body>
+</html>

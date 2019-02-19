@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!--
+Pier Domenico Garrone
+31-01-2019
+-->
+<html>
+    <head>
+        <title>Esercizio 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/esercizio2.js" type="text/javascript"></script>
+        <style>
+            input{
+                width: 250px;
+            }
+            input#inDom1,
+            input#inDom2{
+                background-color: lightblue
+            }
+            input#inDom3,
+            input#inDom4{
+                background-color: lightseagreen
+            }
+            .pulsante{
+                width: 50px;
+            }
+            #inValore{
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <div id="divQuiz">QUIZ</div>
+            <input type="text" id="inDom1" placeholder="Ins. nome Cuccarini pt.10"/><br/>
+            <input type="text" id="inDom2" placeholder="Ins. nome Hunziker pt.10"/><br/>
+            <input type="text" id="inDom3" placeholder="Ins. nome Levi Montalcini pt.20"/><br/>
+            <input type="text" id="inDom4" placeholder="Ins. nome Majorana pt.30"/><br/>
+            <button onclick="inviaTest()">Invia test</button><br/>
+            <span id="spEsito"></span>
+
+        </div>
+        <hr/>
+        <div id="div2">
+            <input type="number" id="inValore" placeholder="Ins. val. moneta"/>
+            
+            <input type="button" class="pulsante" onclick="getMoney()" value="prendi" />
+            <input type="button" class="pulsante" onclick="putMoney()" value="metti" />
+            <br/>
+            <span id="spTotale">Totale = 0 €</span>
+            
+
+        </div>
+    </body>
+
+</html>

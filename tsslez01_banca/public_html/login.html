@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="login">
+            <h2>LOGIN</h2>
+            <input type="text" id="in_usr" placeholder="ins. username" /><br/>
+            <input type="password" id="in_pwd" placeholder="ins. password" /><br/>
+            <input type="text" id="in_tkn" placeholder="ins. token" /><br/>
+            <button onclick="loginUser()">Login</button>
+        </div>
+    </body>
+</html>
+
+<script>
+    function loginUser() {
+        //parametrizzare e non metterli direttamente nel IF
+        var okusr="mimmo";
+        var okpwd="mimmo";
+        var oktkn="qwertyuiop";
+        
+        var txusr = document.getElementById("in_usr").value;
+        var txpwd = document.getElementById("in_pwd").value;
+        var txtkn = document.getElementById("in_tkn").value;
+        
+        if ((txusr == okusr && txpwd == okpwd) || txtkn == oktkn) {
+            //cosa fare se vero e quindi ok
+            alert("OK ti faccio entrare");
+        }
+        else {
+            //cosa fare se errato
+            alert("dati non validi");
+        }
+    }
+    
+</script>
