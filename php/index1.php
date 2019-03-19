@@ -46,13 +46,73 @@ function showEmp() {
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("myemp").innerHTML = this.responseText;
+                
+                // metto il risultato JSON
+                let newJSON=this.responseText;
+                // manipolo il JSON per poterlo inserire in HTML
+                let okHTML=prepareHTML(newJSON);
+                document.getElementById("myemp").innerHTML = okHTML;
             }
         };
-        xmlhttp.open("GET", "getEmps.php?country=" + str, true);
+        xmlhttp.open("GET", "getEmps_json.php?country=" + str, true);
         xmlhttp.send();
     }
 }
+
+
+function prepareHTML(dbJSON){
+    let ar_rows = JSON.parse(dbJSON);
+    
+    //"<tr>
+    let ht="";
+    for (i=0;i<ar_rows.length;i++) {
+        ht+="<tr><td>"+ar_rows[i].firstname+"</td><td>"+ar_rows[i].lastname+"</td><td>"+ar_rows[i].city+"</td><td>"+ar_rows[i].jobtitle+"</td>";
+    }
+    htok="<table>"+ht+"</table>";
+    return htok;
+        
+}
+
+
+function creaTabellaDaJson(oggJson, listaCampi, idTabella, classeTabella, contenitore="body") {
+    let tabella = document.createElement("table");
+    tabella.id = idTabella;
+    tabella.className = classeTabella;
+
+    let vCampi=listaCampi.split(",");
+    //    riga intestazione
+    let thead= document.createElement("thead");
+    let riga= document.createElement("tr");
+    vCampi.forEach(function (campo, i) {
+        let th=document.createElement("th");
+        th.innerHTML= campo;
+        riga.append(th);
+    });
+    
+    tabella.append(thead);
+    thead.append(riga);
+    
+    let tBody=document.createElement("tbody");
+    oggJson.forEach(function (record,i){
+        let rigaRecord=document.createElement("tr");
+        vCampi.forEach(function (campo, j) {
+            let cella= document.createElement("td");
+            cella.innerHTML=oggJson[i][campo];
+            rigaRecord.appendChild(cella);
+            
+        });
+        tBody.append(rigaRecord);
+    })
+    
+    tabella.append(tBody);
+    //    append della tabella al conteni
+    //    tore
+    document.querySelector(contenitore).append(tabella);
+    
+}
+
+
+
 </script>
 
 
